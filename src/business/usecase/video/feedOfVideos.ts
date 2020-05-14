@@ -3,40 +3,44 @@ import { VideoGateway } from "../../gateway/videoGateway";
 export class FeedOfVideosUC {
     constructor(
         private videoGateway: VideoGateway
-    ){}
+    ) { }
 
-    public async execute(): Promise<FeedOfVideosUCOutputVideo[]>{
+    private POSTS_PER_PAGE = 10;
 
-        const videos = await this.videoGateway.getFeedVideos()
+    public async execute(input: FeedOfVideosUCInput): Promise<FeedVideoUCOutput> {
 
-        if(!videos){
+        let page = input.page >= 1 ? input.page : 1;
+
+        const offset = this.POSTS_PER_PAGE * (page - 1);
+
+        const videos = await this.videoGateway.getFeedVideos(this.POSTS_PER_PAGE, offset)
+
+        if (!videos) {
             throw new Error("Feed of videos are Empty")
         }
 
-        return videos.map(video => {
+        return {
+            videos: videos.map(video => {
                 return {
                     id: video.getId(),
                     title: video.getTitle(),
-                    link: video.getLink(),
-                    description: video.getDescription(),
-                    createDate: video.getCreateDate(),
-                    userId: video.getUserId(),
-                    name: video.getName(),
-                    image: video.getImage()
+                    link: video.getLink()
                 }
             })
-        
+        }
+
     }
 }
-
-export interface FeedOfVideosUCOutputVideo{
+export interface FeedVideoUCOutput {
+    videos: FeedOfVideoUCOutput[];
+}
+export interface FeedOfVideoUCOutput {
     id: string;
     title: string;
     link: string;
-    description: string;
-    createDate: Date;
-    userId: string;
-    name: string;
-    image: string;
 }
 
+export interface FeedOfVideosUCInput {
+    page: number;
+}
+ 

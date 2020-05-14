@@ -12,12 +12,12 @@ export const loginUserEndpoint = async (req: Request, res: Response) => {
   );
 
   try {
-    const token = await loginUserUC.execute({
+    const result = await loginUserUC.execute({
       email: req.body.email,
       password: req.body.password
     });
 
-    res.send({ message: "User successfully logged in", token });
+    res.status(200).send(result)
   } catch (err) {
     res.status(400).send({
       message: err.message,

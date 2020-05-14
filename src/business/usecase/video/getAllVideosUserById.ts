@@ -1,7 +1,7 @@
 import { VideoGateway } from "../../gateway/videoGateway";
 import { AuthenticationGateway } from "../../gateway/authenticationGateway";
 import { FeedVideos } from "../../entities/feedVideos";
-
+import { NotFound } from "../../error/NotFound";
 
 export class GetAllVideosUserByIdUC {
   constructor(
@@ -16,7 +16,7 @@ export class GetAllVideosUserByIdUC {
     let videos: FeedVideos[] | undefined
     
     if (!userInfo) {
-      throw new Error("User not found!")
+      throw new NotFound
     }
     if(input.id){
       videos = await this.videoGateway.getAllVideosUserById(input.id);

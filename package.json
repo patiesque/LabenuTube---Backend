@@ -10,12 +10,12 @@
     "test": "node ./node_modules/jest/bin/jest.js",
     "ziplambda": "bestzip ../lambda.zip ./*",
     "build": "rm -rf build && tsc",
-    "postbuild": "cp ./package.json build && cd build && yarn && npm run ziplambda",
-    "create:db": "tsc && node databaseCreation/DataManager.js"
+    "postbuild": "cp ./package.json build && cd build && yarn && npm run ziplambda"
   },
   "author": "Patricia Matiesque",
   "license": "ISC",
   "dependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.6",
     "@types/dotenv": "^8.2.0",
     "@types/express": "4.17.2",
@@ -26,6 +26,7 @@
     "@types/nodemailer": "^6.4.0",
     "@types/randomstring": "^1.1.6",
     "@types/uuid": "^3.4.6",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "4.17.1",

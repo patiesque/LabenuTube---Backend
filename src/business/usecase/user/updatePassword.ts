@@ -1,6 +1,7 @@
 import { UserGateway } from "../../gateway/userGateway";
 import { AuthenticationGateway } from "../../gateway/authenticationGateway";
 import { CryptographyGateway } from "../../gateway/cryptographyGateway";
+import { NotFound } from "../../error/NotFound";
 
 export class UpdatePasswordUC {
   constructor(
@@ -12,12 +13,12 @@ export class UpdatePasswordUC {
   public async execute(input: UpdatePasswordUCInput): Promise<UpdatePasswordUCOutput> {
     const userInfo = await this.authenticationGateway.getUsersInfoFromToken(input.token)
     if (!userInfo) {
-      throw new Error("User not found!")
+      throw new NotFound
     }
 
     const user = await this.userGateway.getUserById(userInfo.id)
     if (!user) {
-      throw new Error("User not found!")
+      throw new NotFound
     }
 
     const oldPassword = await this.cryptographyGateway.compare(input.oldPassword, user.getPassword());

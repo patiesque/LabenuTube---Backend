@@ -1,4 +1,5 @@
 import { VideoGateway } from "../../gateway/videoGateway";
+import { NotFound } from "../../error/NotFound";
 
 export class GetVideoDetailUC {
     constructor(
@@ -9,7 +10,7 @@ export class GetVideoDetailUC {
         const video = await this.videoGateway.getVideoById(input.id);
 
         if(!video){
-            throw new Error("Video Not found!");
+            throw new NotFound;
         }
 
         return{

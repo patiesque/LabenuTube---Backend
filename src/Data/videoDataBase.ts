@@ -4,10 +4,26 @@ import { Video } from "../business/entities/videos";
 import { DuplicateUserError } from "../business/error/DuplicateUserError";
 import { FeedVideos } from "../business/entities/feedVideos";
 
-
 export class VideoDB extends BaseDB implements VideoGateway {
     private userTableName = "Users";
     private videoTableName = "Videos";
+
+
+    private mapDBVideoToVideo(input?: any): FeedVideos | undefined {
+        return (
+            input &&
+            new FeedVideos(
+                input.id,
+                input.title,
+                input.link,
+                input.description,
+                input.createDate,
+                input.userId,
+                input.name,
+                input.image
+            )
+        )
+    }
 
     async createVideo(video: Video) {
         try {
@@ -40,20 +56,12 @@ export class VideoDB extends BaseDB implements VideoGateway {
         `);
         console.log("result", result)
         return result[0].map((video: any) => {
-        return new FeedVideos(
-          video.id,
-          video.title,
-          video.link,
-          video.description,
-          video.createDate,
-          video.userId,
-          video.name,
-          video.image
-        );
-      })
+            return this.mapDBVideoToVideo(result[0][0])
+
+        })
     }
 
-    public async updateVideo(id: string, userId: string, title: string, description: string): Promise<void>{
+    public async updateVideo(id: string, userId: string, title: string, description: string): Promise<void> {
         await this.connection.raw(`
             UPDATE ${this.videoTableName}
             SET title = '${title}', description = '${description}'
@@ -61,7 +69,7 @@ export class VideoDB extends BaseDB implements VideoGateway {
         `)
     }
 
-    public async getVideoById(id: string): Promise<FeedVideos | undefined>{
+    public async getVideoById(id: string): Promise<FeedVideos | undefined> {
         const result = await this.connection.raw(`
             SELECT v.*, u.name, u.image
             FROM ${this.videoTableName} v
@@ -70,56 +78,38 @@ export class VideoDB extends BaseDB implements VideoGateway {
             WHERE v.id = '${id}'
         `)
 
-        if(!result[0][0]){
+        if (!result[0][0]) {
             return undefined;
         };
 
-        return new FeedVideos(
-            result[0][0].id,
-            result[0][0].title,
-            result[0][0].link,
-            result[0][0].description,
-            result[0][0].createDate,
-            result[0][0].userId,
-            result[0][0].name,
-            result[0][0].image
-        )
+        return this.mapDBVideoToVideo(result[0][0])
+
     }
 
-    public async deleteVideo(id: string, userId: string): Promise<void>{
+    public async deleteVideo(id: string, userId: string): Promise<void> {
         await this.connection.raw(`
             DELETE FROM ${this.videoTableName}
             WHERE id = '${id}' AND userId = '${userId}';
         `)
     }
 
-    public async getFeedVideos(): Promise<FeedVideos[] | undefined>{
-        const videos = await this.connection.raw(`
+    public async getFeedVideos(limit: number, offset: number): Promise<FeedVideos[] | undefined> {
+        const result = await this.connection.raw(`
             SELECT v.*, u.name, u.image
             FROM ${this.videoTableName} v
             JOIN ${this.userTableName} u
             ON v.userId = u.id
+            ORDER BY v.createDate DESC
+            LIMIT ${limit} OFFSET ${offset};
         `);
 
-        if(!videos[0][0]){
+        if (!result[0][0]) {
             return undefined;
-        }; 
+        };
 
-        return await videos[0].map((video: any) => {
-            return new FeedVideos(
-                video.id,
-                video.title,
-                video.link,
-                video.description,
-                video.createDate,
-                video.userId,
-                video.name,
-                video.image
-            );
-        }); 
+        return await result[0].map((video: any) => {
+            return this.mapDBVideoToVideo(result[0][0])
+        });
     };
-
-    
-
 
 }

@@ -1,5 +1,6 @@
 import { VideoGateway } from "../../gateway/videoGateway";
 import { AuthenticationGateway } from "../../gateway/authenticationGateway";
+import { NotFound } from "../../error/NotFound";
 
 export class DeleteVideoUC{
     constructor(
@@ -17,7 +18,7 @@ export class DeleteVideoUC{
         const video = await this.videoGateway.getVideoById(input.id);
 
         if(!video){
-            throw new Error("Video not found")
+            throw new NotFound
         }
         
         if(userInfo.id !== video.getUserId()){
