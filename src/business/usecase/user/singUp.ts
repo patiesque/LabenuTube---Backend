@@ -6,14 +6,14 @@ import { MinimumCharacterError } from "../../error/MinimumCharacterError";
 import { User } from "../../entities/user";
 
 
-export class CreateUserUC {
+export class SingUpUC {
   constructor(
     private userGateway: UserGateway,
     private authenticationGateway: AuthenticationGateway,
     private cryptographyGateway: CryptographyGateway
     ) {}
 
-  public async execute(input: CreateUserUCInput): Promise<CreateUserUCOutput> {
+  public async execute(input: SingUpUCInput): Promise<SingUpUCOutput> {
     
       const id = v4();
       const pass = await this.cryptographyGateway.encrypt(input.password)
@@ -34,7 +34,7 @@ export class CreateUserUC {
       };
   }
 }
-export interface CreateUserUCInput {
+export interface SingUpUCInput {
   name: string;
   email: string;
   birthday:string;
@@ -42,6 +42,6 @@ export interface CreateUserUCInput {
   password: string;
 }
 
-export interface CreateUserUCOutput {
+export interface SingUpUCOutput {
   message: string;
 }

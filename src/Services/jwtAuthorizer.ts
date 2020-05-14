@@ -2,7 +2,7 @@ import {
   AuthenticationGateway,
   UsersInfoForToken
 } from "../business/gateway/authenticationGateway";
-import * as jwt from "jsonwebtoken";
+import * as jwt from "./node_modules/jsonwebtoken";
 
 export class JwtAuthorizer implements AuthenticationGateway {
   private SECRET_KEY = "PATY";

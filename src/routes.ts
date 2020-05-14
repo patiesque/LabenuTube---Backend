@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { createUserEndpoint } from "./presentation/endpoints/user/createUser";
+import { singUpEndpoint } from "./presentation/endpoints/user/singUp";
 import { loginUserEndpoint } from "./presentation/endpoints/user/loginUser";
 import { updatePasswordEndpoint } from "./presentation/endpoints/user/updatePassword";
 import { createVideoEndpoint } from "./presentation/endpoints/video/createVideo";
@@ -15,7 +15,7 @@ app.use(cors());
 
 app.use(express.json()); // Linha mágica (middleware)
 
-app.post("/user/create", createUserEndpoint);
+app.post("/user/create", singUpEndpoint);
 app.post("/user/login", loginUserEndpoint);
 app.post("/user/password", updatePasswordEndpoint);
 

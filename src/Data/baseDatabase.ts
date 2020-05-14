@@ -1,4 +1,4 @@
-import knex from "knex";
+import knex from "./node_modules/knex";
 
 export abstract class BaseDB {
   private connectionData = {
