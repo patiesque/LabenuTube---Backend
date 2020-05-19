@@ -10,7 +10,8 @@
 
 ## 💡 Repositório:
 
-Repositorio foi desenvolvido para projeto curso Labenu.
+Repositorio foi desenvolvido para projeto curso Labenu.<br/>
+
 Backend criado para cadastro, login e troca de senha do usuario, como criação do video, editar dados do video, deletar, feed, e ver detalhes do video.
 
 ## ⚙️ Techs:
@@ -50,7 +51,7 @@ npm run start:dev
 <h4 align="center">
   ---
 
-Patricia Matieque Alves
+Patricia Matieque Alves <br/>
 [Linkedin](https://www.linkedin.com/in/patricia-matiesque/)
 </h4>
 
