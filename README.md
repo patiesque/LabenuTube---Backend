@@ -51,7 +51,7 @@ npm run start:dev
 <h4 align="center">
   ---
 
-Patricia Matieque Alves <br/>
+Patricia Matiesque Alves <br/>
 [Linkedin](https://www.linkedin.com/in/patricia-matiesque/)
 </h4>
 
