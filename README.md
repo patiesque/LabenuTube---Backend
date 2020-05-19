@@ -11,8 +11,8 @@
 ## 💡 Repositório:
 
 Repositorio foi desenvolvido para projeto curso Labenu.<br/>
-Backend <br/>
-Criado para cadastro, login e troca de senha do usuario, como criação do video, editar dados do video, deletar, feed, e ver detalhes do video.
+Criado para cadastro, login e troca de senha do usuario, <br/>
+como criação do video, editar dados do video, deletar, feed, e ver detalhes do video.
 
 ## ⚙️ Techs:
 - NodeJs 
