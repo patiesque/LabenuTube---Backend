@@ -10,7 +10,12 @@
 
 ## 💡 Repositório:
 
-Repositorio foi desenvolvido utilizando NodeJs + Typescript 
+Repositorio foi desenvolvido para projeto curso Labenu.
+Backend criado para cadastro, login e troca de senha do usuario, como criação do video, editar dados do video, deletar, feed, e ver detalhes do video.
+
+## ⚙️ Techs:
+- NodeJs 
+- Typescript 
 - Lambda
 - API gateway
 - Express 
@@ -20,12 +25,33 @@ Repositorio foi desenvolvido utilizando NodeJs + Typescript
 - UUID
 - MySQL
 
+## 🏁 Para rodar o projeto:
+
+Clone este repositório em sua máquina:
+
+```bash
+$ git clone https://github.com/patiesque/LabenuTube---Backend
+```
+
+cd `LabenuTube---Backend` e rode:
+
+```bash
+npm install
+```
+
+para iniciar:
+
+```bash
+npm run start:dev
+```
+
 <br/>
 
 <h4 align="center">
   ---
 
-Patricia Matieque :wave: [Linkedin](https://www.linkedin.com/in/patricia-matiesque/)
+Patricia Matieque Alves
+[Linkedin](https://www.linkedin.com/in/patricia-matiesque/)
 </h4>
 
 <br/>
